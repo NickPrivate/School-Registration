@@ -20,8 +20,9 @@ struct Class
 
     }
 
-    //addClass function that will add the class to the map and return a pair that can be added into the main main
-    //std::pair addClass (std::pair)
+     std::pair<int,Class> addClass (std::pair<int,Class> myClass){
+        
+     }
     
     
 };
@@ -45,7 +46,7 @@ int main(){
         std::cin >> classTime;
         std::cin >> classNum;
 
-        classes(className,classTime,classNum);
+    Class classes( className, classTime, classNum);
 
         if (classMap->find(i.first) != classMap->end()) break;
 
