@@ -20,8 +20,26 @@ struct Class
 
     }
 
-     std::pair<int,Class> addClass (std::pair<int,Class> myClass){
-        
+
+    void addClass (std::unordered_map <int,Class> &myClass){
+
+        std::string className, classTime;
+        int classNum;
+
+        std::cin >> className >> classTime >> classNum;
+
+        Class newClass (className, classTime, classNum);
+
+        if (myClass.find(classNum) == myClass.end()){
+
+            myClass[classNum] = newClass;
+            std::cout << "Class has been successfully added\n";
+
+        }
+        else {
+            std::cout << "Class already exists in the map\n";
+        }
+          
      }
     
     
