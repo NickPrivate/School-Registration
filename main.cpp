@@ -5,14 +5,17 @@
 #include <utility>
 #include <unordered_map>
 
-struct Class
+class ClassStruct
 {
-
+private:
     std::string className;
     std::string classTime;
     int classNum;
+public:
 
-    Class(std::string& newClasssName, std::string& newClassTime, int & newClassNum){
+    ClassStruct() {};
+
+    ClassStruct(const std::string& newClasssName, const std::string& newClassTime,const int & newClassNum){
 
         className = newClasssName;
         classTime = newClassTime;
@@ -21,25 +24,30 @@ struct Class
     }
 
 
-    void addClass (std::unordered_map <int,Class> &myClass){
+    void addClass (std::unordered_map <int,ClassStruct> &myClass){
 
         std::string className, classTime;
         int classNum;
 
         std::cin >> className >> classTime >> classNum;
 
-        Class newClass (className, classTime, classNum);
+        ClassStruct newClass (className, classTime, classNum);
 
         if (myClass.find(classNum) == myClass.end()){
 
             myClass[classNum] = newClass;
-            std::cout << "Class has been successfully added\n";
+            std::cout << "\nClass has been successfully added\n";
 
         }
         else {
-            std::cout << "Class already exists in the map\n";
+            std::cout << "\nClass already exists in the map\n";
         }
           
+     }
+
+     void printClass ()const{
+
+        std::cout << className << ", " <<classTime << ", " << classNum << std::endl;
      }
     
     
@@ -52,28 +60,21 @@ int main(){
     std::string className;
     std::string classTime;
     int classNum;
+    char quit;
 
-    Class classes( className, classTime, classNum);
+    ClassStruct classes( className, classTime, classNum);
 
-    std::unique_ptr<std::unordered_map<int,Class>> classMap;
-
-    for (const auto& i : *classMap){
-
-        std::cout << "Type the class name, class time, and class num\n";
-        std::cin >> className;
-        std::cin >> classTime;
-        std::cin >> classNum;
-
-    Class classes( className, classTime, classNum);
-
-        if (classMap->find(i.first) != classMap->end()) break;
-
-        classMap->insert(i);
+    std::unordered_map<int, ClassStruct> classMap;
 
 
-    }
+    do
+    {
+        std::cout << "Enter your class in this order: Name, Time, Number\n";
+        classes.addClass(classMap);
+        classes.printClass();
 
-
+    } while (quit != 'q');
+    
 
     return 0;
 }
